@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plato Coffee Order Form</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      margin:;
+      padding:0;
+    }
+
+    header {
+      background-color: #839A71;
+      color: Black;
+      padding: 10px 0;
+      text-align: center;
+    }
+	header .nav-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+header .nav-button button {
+  font-size: 1.5em;
+  background-color: ;
+  color:#000000 ;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+header .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+header .dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+header .dropdown-content a:hover {
+  background-color: white;
+}
+
+header .show {
+  display: block;
+}
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+	  color: #839A71;
+    }
+
+    section.menu {
+      margin-bottom: 30px;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item h3 {
+      margin: 0;
+	  color: #4C301F;
+    }
+
+    .menu-item p:first-child {
+      margin-bottom: 5px;
+    }
+
+    .size-options,
+    .milk-options {
+      display: flex;
+      align-items: center;
+    }
+
+    .size-options label,
+    .milk-options label {
+      margin-right: 5px;
+    }
+
+    .order-button {
+      background-color: #839A71;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+
+
+
+   .cart {
+  padding: 2em;
+  text-align: center; /* Can be removed if you don't want the cart itself to be centered */
+}
+
+.cart-items {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Use flexbox for horizontal alignment */
+  flex-direction: column; /* Stack items vertically */
+}
+
+.cart-total {
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+
+.delivery-options {
+  margin: 2em 0;
+}
+
+.delivery-options label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.checkout-container {
+  margin-top: 2em;
+}
+
+.checkout-button {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  background-color: #e0c097;
+  color: #4a2f2f;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+}
+
+.checkout-button:hover {
+  background-color: ;
+}
+  </style>
+</head>
+<body>
+  <header>
+   <div class="heading-content">
+    <h1>PO Beans Menu</h1>
+	</div>
+	<div class="nav-button">
+        <button onclick="toggleDropdown()">☰</button>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="#file:///C:/Users/Prenushia/Desktop/html%20assignment/ain.html#products">About us</a>
+          <a href="#file:///C:/Users/Prenushia/Desktop/html%20assignment/Menu.html">Pre-Order</a>
+          <a href="#file:///C:/Users/Prenushia/Desktop/html%20assignment/ain.html#products">Our Menu</a>
+          <a href="#file:///C:/Users/Prenushia/Desktop/html%20assignment/ain.html#products">Our Products</a>
+        </div>
+      </div>
+  </header>
+  <main>
+    <section class="menu">
+      <!-- muffins Category -->
+	  <div class="category">
+        <h2>Hot Drinks</h2>
+        <ul class="menu-items">
+          <li class="menu-item">
+            <h3>Espresso</h3>
+        <p>An intense coffee beverage brewed by forcing a small amount of nearly boiling water through finely-ground coffee beans.</p>
+        <p>Price: R<span id="espresso-price">0.00</span></p>
+        <div class="size-options">
+          <label for="espresso-size-s">S</label>
+          <input type="radio" id="espresso-size-s" name="espresso-size" data-price="30.00">
+          <label for="espresso-size-m">M</label>
+          <input type="radio" id="espresso-size-m" name="espresso-size" data-price="40.00">
+          <label for="espresso-size-l">L</label>
+          <input type="radio" id="espresso-size-l" name="espresso-size" data-price="50.00">
+        </div>
+        <div class="milk-options">
+          <label for="espresso-milk-none">None</label>
+          <input type="radio" id="espresso-milk-none" name="espresso-milk">
+          <label for="espresso-milk-almond">Almond Milk</label>
+          <input type="radio" id="espresso-milk-almond" name="espresso-milk">
+          <label for="espresso-milk-soy">Soy Milk</label>
+          <input type="radio" id="espresso-milk-soy" name="espresso-milk">
+        </div>
+        <button class="order-button" onclick="addToCart('Espresso')">Add to Cart</button>
+      </li>
+          <li class="menu-item">
+            <h3>Latte</h3>
+            <p>A smooth blend of espresso and steamed milk.</p>
+           <p>Price: R<span id="latte-price">0.00</span></p>
+            <div class="size-options">
+              <label for="latte-size-s">S</label>
+              <input type="radio" id="latte-size-s" name="latte-size" data-price="20.00">
+              <label for="latte-size-m">M</label>
+              <input type="radio" id="latte-size-m" name="latte-size"data-price="28.00">
+              <label for="latte-size-l">L</label>
+              <input type="radio" id="latte-size-l" name="latte-size" data-price="36.00">
+            </div>
+            <div class="milk-options">
+              <label for="latte-milk-none">None</label>
+              <input type="radio" id="latte-milk-none" name="latte-milk">
+              <label for="latte-milk-almond">Almond Milk</label>
+              <input type="radio" id="latte-milk-almond" name="latte-milk">
+              <label for="latte-milk-soy">Soy Milk</label>
+              <input type="radio" id="latte-milk-soy" name="latte-milk">
+            </div>
+            <button class="order-button" onclick="addToCart('latte')">Add to Cart</button>
+          </li>
+        <li class="menu-item">
+    <h3>Cappuccino</h3>
+    <p>A rich and foamy espresso-based drink.</p>
+    <p>Price: R<span id="cappuccino-price">0.00</span></p>
+    <div class="size-options">
+        <label for="cappuccino-size-s">S</label>
+        <input type="radio" id="cappuccino-size-s" name="cappuccino-size" data-price="30.00">
+        <label for="cappuccino-size-m">M</label>
+        <input type="radio" id="cappuccino-size-m" name="cappuccino-size" data-price="35.00">
+        <label for="cappuccino-size-l">L</label>
+        <input type="radio" id="cappuccino-size-l" name="cappuccino-size" data-price="38.98">
+    </div>
+    <div class="milk-options">
+        <label for="cappuccino-milk-none">None</label>
+        <input type="radio" id="cappuccino-milk-none" name="cappuccino-milk">
+        <label for="cappuccino-milk-almond">Almond Milk</label>
+        <input type="radio" id="cappuccino-milk-almond" name="cappuccino-milk">
+        <label for="cappuccino-milk-soy">Soy Milk</label>
+        <input type="radio" id="cappuccino-milk-soy" name="cappuccino-milk">
+    </div>
+    <button class="order-button" onclick="addToCart('Cappuccino')">Add to Cart</button>
+</li>
+
+<li class="menu-item">
+    <h3>Americano</h3>
+    <p>Espresso diluted with hot water.</p>
+    <p>Price: R<span id="americano-price">0.00</span></p>
+    <div class="size-options">
+        <label for="americano-size-s">S</label>
+        <input type="radio" id="americano-size-s" name="americano-size" data-price="25.00">
+        <label for="americano-size-m">M</label>
+        <input type="radio" id="americano-size-m" name="americano-size" data-price="30.29">
+        <label for="americano-size-l">L</label>
+        <input type="radio" id="americano-size-l" name="americano-size" data-price="36.90">
+    </div>
+    <div class="milk-options">
+        <label for="americano-milk-none">None</label>
+        <input type="radio" id="americano-milk-none" name="americano-milk">
+        <label for="americano-milk-almond">Almond Milk</label>  
+        <input type="radio" id="americano-milk-almond" name="americano-milk">
+        <label for="americano-milk-soy">Soy Milk</label>
+        <input type="radio" id="americano-milk-soy" name="americano-milk">
+    </div>
+    <button class="order-button" onclick="addToCart('Americano')">Add to Cart</button>
+</li>
+
+<li class="menu-item">
+  <h3>Macchiato</h3>
+  <p>Espresso diluted with hot water.</p>
+  <p>Price: R<span id="macchiato-price">0.00</span></p>
+  <div class="size-options">
+    <label for="macchiato-size-s">S</label>
+    <input type="radio" id="macchiato-size-s" name="macchiato-size" data-price="20.00">
+    <label for="macchiato-size-m">M</label>
+    <input type="radio" id="macchiato-size-m" name="macchiato-size" data-price="23.98">
+    <label for="macchiato-size-l">L</label>
+    <input type="radio" id="macchiato-size-l" name="macchiato-size" data-price="28.80">
+  </div>
+  <div class="milk-options">
+    <label for="macchiato-milk-none">None</label>
+    <input type="radio" id="macchiato-milk-none" name="macchiato-milk">
+    <label for="macchiato-milk-almond">Almond Milk</label>
+    <input type="radio" id="macchiato-milk-almond" name="macchiato-milk">
+    <label for="macchiato-milk-soy">Soy Milk</label>
+    <input type="radio" id="macchiato-milk-soy" name="macchiato-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('Macchiato')">Add to Cart</button>
+</li>
+
+
+<li class="menu-item">
+  <h3>Flat white</h3>
+  <p>Espresso diluted with hot water.</p>
+  <p>Price: R<span id="flatWhite-price">0.00</span></p>
+  <div class="size-options">
+    <label for="flatWhite-size-s">S</label>
+    <input type="radio" id="flatWhite-size-s" name="flatWhite-size" data-price="20.00">
+    <label for="flatWhite-size-m">M</label>
+    <input type="radio" id="flatWhite-size-m" name="flatWhite-size" data-price="23.98">
+    <label for="flatWhite-size-l">L</label>
+    <input type="radio" id="flatWhite-size-l" name="flatWhite-size" data-price="28.80">
+  </div>
+  <div class="milk-options">
+    <label for="flatWhite-milk-none">None</label>
+    <input type="radio" id="flatWhite-milk-none" name="flatWhite-milk">
+    <label for="flatWhite-milk-almond">Almond Milk</label>
+    <input type="radio" id="flatWhite-milk-almond" name="flatWhite-milk">
+    <label for="flatWhite-milk-soy">Soy Milk</label>
+    <input type="radio" id="flatWhite-milk-soy" name="flatWhite-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('flatWhite')">Add to Cart</button>
+</li>
+
+
+
+<li class="menu-item">
+  <h3>Double Espresso</h3>
+  <p>Espresso diluted with hot water.</p>
+  <p>Price: R<span id="double-espresso-price">0.00</span></p>
+  <div class="size-options">
+    <label for="double-espresso-size-s">S</label>
+    <input type="radio" id="double-espresso-size-s" name="double-espresso-size" data-price="30.00">
+    <label for="double-espresso-size-m">M</label>
+    <input type="radio" id="double-espresso-size-m" name="double-espresso-size" data-price="35.00">
+    <label for="double-espresso-size-l">L</label>
+    <input type="radio" id="double-espresso-size-l" name="double-espresso-size" data-price="40.00">
+  </div>
+  <div class="milk-options">
+    <label for="double-espresso-milk-none">None</label>
+    <input type="radio" id="double-espresso-milk-none" name="double-espresso-milk">
+    <label for="double-espresso-milk-almond">Almond Milk</label>
+    <input type="radio" id="double-espresso-milk-almond" name="double-espresso-milk">
+    <label for="double-espresso-milk-soy">Soy Milk</label>
+    <input type="radio" id="double-espresso-milk-soy" name="double-espresso-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('Double Espresso')">Add to Cart</button>
+</li>
+
+
+
+	  <div class="category">
+        <h2>Non-Coffee </h2>
+        <ul class="menu-items">
+        <li class="menu-item">
+  <h3>Hot chocolate</h3>
+  <p>An intense coffee beverage brewed by forcing a small amount of nearly boiling water through finely-ground coffee beans.</p>
+  <p>Price: R<span id="hot-chocolate-price">0.00</span></p>
+  <div class="size-options">
+    <label for="hot-chocolate-size-s">S</label>
+    <input type="radio" id="hot-chocolate-size-s" name="hot-chocolate-size" data-price="35.00">
+    <label for="hot-chocolate-size-m">M</label>
+    <input type="radio" id="hot-chocolate-size-m" name="hot-chocolate-size" data-price="38.98">
+    <label for="hot-chocolate-size-l">L</label>
+    <input type="radio" id="hot-chocolate-size-l" name="hot-chocolate-size" data-price="42.00">
+  </div>
+  <div class="milk-options">
+    <label for="hot-chocolate-milk-none">None</label>
+    <input type="radio" id="hot-chocolate-milk-none" name="hot-chocolate-milk">
+    <label for="hot-chocolate-milk-almond">Almond Milk</label>
+    <input type="radio" id="hot-chocolate-milk-almond" name="hot-chocolate-milk">
+    <label for="hot-chocolate-milk-soy">Soy Milk</label>
+    <input type="radio" id="hot-chocolate-milk-soy" name="hot-chocolate-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('hot-chocolate')">Add to Cart</button>
+</li>
+
+        <li class="menu-item">
+  <h3>Milkshake</h3>
+  <p>A smooth blend of espresso and steamed milk.</p>
+  <p>Price: R<span id="milkshake-price">0.00</span></p>
+  <div class="size-options">
+    <label for="milkshake-size-s">S</label>
+    <input type="radio" id="milkshake-size-s" name="milkshake-size" data-price="30.00">
+    <label for="milkshake-size-m">M</label>
+    <input type="radio" id="milkshake-size-m" name="milkshake-size" data-price="35.98">
+    <label for="milkshake-size-l">L</label>
+    <input type="radio" id="milkshake-size-l" name="milkshake-size" data-price="39.98">
+  </div>
+  <div class="milk-options">
+    <label for="milkshake-milk-none">Blueberry</label>
+    <input type="radio" id="milkshake-milk-none" name="milkshake-milk">
+    <label for="milkshake-milk-chocolate">Chocolate</label>
+    <input type="radio" id="milkshake-milk-chocolate" name="milkshake-milk">
+    <label for="milkshake-milk-strawberry">Strawberry</label>
+    <input type="radio" id="milkshake-milk-strawberry" name="milkshake-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('milkshake')">Add to Cart</button>
+</li>
+
+         <li class="menu-item">
+  <h3>Smoothie</h3>
+  <p>A rich and foamy espresso-based drink.</p>
+  <p>Price: R<span id="smoothie-price">0.00</span></p>
+  <div class="size-options">
+    <label for="smoothie-size-s">S</label>
+    <input type="radio" id="smoothie-size-s" name="smoothie-size" data-price="35.00">
+    <label for="smoothie-size-m">M</label>
+    <input type="radio" id="smoothie-size-m" name="smoothie-size" data-price="38.35">
+    <label for="smoothie-size-l">L</label>
+    <input type="radio" id="smoothie-size-l" name="smoothie-size" data-price="41.35">
+  </div>
+  <div class="milk-options">
+    <label for="smoothie-milk-none">None</label>
+    <input type="radio" id="smoothie-milk-none" name="smoothie-milk">
+    <label for="smoothie-milk-almond">Almond Milk</label>
+    <input type="radio" id="smoothie-milk-almond" name="smoothie-milk">
+    <label for="smoothie-milk-soy">Soy Milk</label>
+    <input type="radio" id="smoothie-milk-soy" name="smoothie-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('smoothie')">Add to Cart</button>
+</li>
+
+          <li class="menu-item">
+  <h3>Vanilla Milkshake</h3>
+  <p>Espresso diluted with hot water.</p>
+  <p>Price: R<span id="vanilla-milkshake-price">0.00</span></p>
+  <div class="size-options">
+    <label for="vanilla-milkshake-size-s">S</label>
+    <input type="radio" id="vanilla-milkshake-size-s" name="vanilla-milkshake-size" data-price="30.00">
+    <label for="vanilla-milkshake-size-m">M</label>
+    <input type="radio" id="vanilla-milkshake-size-m" name="vanilla-milkshake-size" data-price="32.98">
+    <label for="vanilla-milkshake-size-l">L</label>
+    <input type="radio" id="vanilla-milkshake-size-l" name="vanilla-milkshake-size" data-price="35.98">
+  </div>
+  <div class="milk-options">
+    <label for="vanilla-milkshake-milk-none">None</label>
+    <input type="radio" id="vanilla-milkshake-milk-none" name="vanilla-milkshake-milk">
+    <label for="vanilla-milkshake-milk-almond">Almond Milk</label>
+    <input type="radio" id="vanilla-milkshake-milk-almond" name="vanilla-milkshake-milk">
+    <label for="vanilla-milkshake-milk-soy">Soy Milk</label>
+    <input type="radio" id="vanilla-milkshake-milk-soy" name="vanilla-milkshake-milk">
+  </div>
+  <button class="order-button" onclick="addToCart('vanilla-milkshake')">Add to Cart</button>
+</li>
+
+        </ul>
+      </div>
+	  
+
+      <!-- Pastries Category -->
+      <div class="category">
+        <h2>Pastrie </h2>
+        <ul class="menu-items">
+          <li class="menu-item">
+  <h3>Croissant</h3>
+            <p>A buttery, flaky, and delicious pastry.</p>
+            <p>Price: R15.00</p>
+            <p>Review: Best croissant ever!</p>
+            <button class="order-button" onclick="addToCart('Croissant', 15.00)">Add to Order</button>
+        </li>
+        <li class="menu-item">
+            <h3>Chocolate Croissant</h3>
+            <p>A soft and fluffy muffin, perfect for a quick snack.</p>
+            <p>Price: R30.00</p>
+            <p>Review: Tasty muffin!</p>
+            <button class="order-button" onclick="addToCart('Choc croissant', 30.00)">Add to Order</button>
+        </li>
+        <li class="menu-item">
+            <h3>Chocolate Muffin </h3>
+            <p>A deliciously crumbly scone, great with tea or coffee.</p>
+            <p>Price: R15.00</p>
+            <p>Review: Yummy scone!</p>
+            <button class="order-button" onclick="addToCart('choc muffin', 15.00)">Add to Order</button>
+        </li>
+        <li class="menu-item">
+            <h3>Blueberry Muffin</h3>
+            <p>A sweet and flaky pastry filled with fruit or cream cheese.</p>
+            <p>Price: R15.00</p>
+            <p>Review: Delicious Danish!</p>
+            <button class="order-button" onclick="addToCart('blu miffin', 15.00)">Add to Order</button>
+        </li>
+        <li class="menu-item">
+            <h3>Cappucino Muffin</h3>
+            <p>A soft and fluffy muffin, perfect for a quick snack.</p>
+            <p>Price: R15.00</p>
+            <p>Review: Tasty muffin!</p>
+            <button class="order-button" onclick="addToCart('Capu Muffin', 15.00)">Add to Order</button>
+        </li>
+        <li class="menu-item">
+            <h3>Cinnomon Doughnuts</h3>
+            <p>A soft and fluffy muffin, perfect for a quick snack.</p>
+            <p>Price: R10.00</p>
+            <p>Review: Tasty muffin!</p>
+            <button class="order-button" onclick="addToCart('Cin Doughnut', 10.00)">Add to Order</button>
+        </li>
+        </ul>
+      </div>
+	
+
+
+  <div class="cart">
+  <h3> Your Cart</h3>
+      <ul class="cart-items"></ul>
+      <p class="cart-total">Total: R<span id="cart-total">0.00</span></p>
+  
+      <button class="checkout-button" onclick="proceedToCheckout()">Proceed to Checkout</button>
+
+    </section>
+  </main>
+
+
+  <script>
+let cart = [];
+
+// Function to add item to cart
+function addToCart(itemName, itemPrice = null) {
+  if (itemPrice !== null) {
+    // Adding an item without size and milk options (like Croissant)
+    let existingItem = cart.find(item => item.name === itemName);
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      cart.push({
+        name: itemName,
+        price: itemPrice,
+        quantity: 1
+      });
+    }
+    // Removed alert message
+ } else {
+    // Adding items with size and milk options
+    const priceElement = document.getElementById(itemName.toLowerCase().replace(/ /g, '-') + '-price');
+    const selectedSize = document.querySelector(`input[name="${itemName.toLowerCase().replace(/ /g, '-') + '-size'}"]:checked`);
+    const selectedMilk = document.querySelector(`input[name="${itemName.toLowerCase().replace(/ /g, '-') + '-milk'}"]:checked`);
+
+    if (selectedSize) {
+      let price = parseFloat(selectedSize.getAttribute('data-price'));
+
+      if (selectedMilk) {
+        // Assuming no extra cost for different milk options
+      }
+
+      priceElement.innerText = price.toFixed(2);
+
+       let existingItem = cart.find(item => item.name === itemName);
+  if (existingItem) {
+    existingItem.quantity++; // Update quantity for existing item
+  } else {
+        // Check for existing item with just the size (no milk)
+        existingItem = cart.find(item => item.name === itemName && item.size === selectedSize.id);
+      }
+
+      if (existingItem) {
+        existingItem.quantity++; // Update quantity for existing item
+      } else {
+        cart.push({
+          name: itemName,
+          size: selectedSize.id,
+          milk: selectedMilk ? selectedMilk.id : 'none',
+          price: price,
+          quantity: 1
+        });
+      }
+      // Removed alert message
+    } else {
+      alert(`Please select a size for the ${itemName}`);
+    }
+  }
+  updateCartDisplay(); // Update cart display after adding item
+}
+
+// Function to update cart display
+function updateCartDisplay() {
+  const cartList = document.querySelector('.cart-items');
+  const totalText = document.querySelector('.cart-total span');
+  cartList.innerHTML = '';
+  let total = 0;
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.classList.add('cart-item');
+    let sizeText = item.size ? ` (${item.size})` : ''; // Display size if available
+    let milkText = item.milk !== 'none' ? ` with ${item.milk}` : ''; // Display milk if selected
+    li.innerHTML = `
+      <span class="cart-item-name">${item.name}${sizeText}${milkText}</span>
+      <span class="cart-item-quantity">${item.quantity} x </span>
+      <span class="cart-item-price">R${(item.price * item.quantity).toFixed(2)}</span>
+      <button class="remove-button" data-price="${item.price}" onclick="removeFromCart(this, ${item.price})">Remove</button>
+    `;
+    cartList.appendChild(li);
+    total += item.price * item.quantity;
+  });
+  totalText.textContent = total.toFixed(2);
+}
+
+
+function removeFromCart(button, itemPrice) {
+  const itemName = button.parentNode.querySelector('.cart-item-name').textContent;
+  const item = cart.find(item => item.name === itemName);
+  if (item) {
+    item.quantity--;
+    if (item.quantity === 0) {
+      cart = cart.filter(cartItem => cartItem.name !== itemName);
+    }
+    updateCartDisplay();
+    const cartTotal = document.getElementById('cart-total');
+    const currentTotal = parseFloat(cartTotal.textContent);
+    const newTotal = currentTotal - itemPrice;
+    cartTotal.textContent = newTotal.toFixed(2);
+  }
+}
+
+  // Assume orderTotal is calculated somehow
+  let orderTotal = calculateOrderTotal();
+  // Store the order total in sessionStorage
+  sessionStorage.setItem('orderTotal', orderTotal);
+
+
+function proceedToCheckout() {
+    // Navigate to the desired URL
+    window.location.href = 'collection.html'; // Change 'checkout.html' to the URL of your checkout page
+}
+
+
+
+
+  </script>
+</body>
+</html>

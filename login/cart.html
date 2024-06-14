@@ -1,0 +1,118 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milkshake Shop</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <ul class="menu">
+        <li class="menu-item">
+            <h3>Milkshake</h3>
+            <p>A smooth blend of espresso and steamed milk.</p>
+            <p>Price: R<span id="milkshake-price">0.00</span></p>
+            <div class="size-options">
+                <label for="milkshake-size-s">S</label>
+                <input type="radio" id="milkshake-size-s" name="milkshake-size" data-price="30.00">
+                <label for="milkshake-size-m">M</label>
+                <input type="radio" id="milkshake-size-m" name="milkshake-size" data-price="35.98">
+                <label for="milkshake-size-l">L</label>
+                <input type="radio" id="milkshake-size-l" name="milkshake-size" data-price="39.98">
+            </div>
+            <div class="milk-options">
+                <label for="milkshake-milk-none">None</label>
+                <input type="radio" id="milkshake-milk-none" name="milkshake-milk">
+                <label for="milkshake-milk-chocolate">Chocolate</label>
+                <input type="radio" id="milkshake-milk-chocolate" name="milkshake-milk">
+                <label for="milkshake-milk-strawberry">Strawberry</label>
+                <input type="radio" id="milkshake-milk-strawberry" name="milkshake-milk">
+            </div>
+            <button class="order-button" onclick="addToCart('milkshake')">Add to Cart</button>
+        </li>
+    </ul>
+
+    <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="proceedToCheckout()">Proceed to Checkout</button>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(itemName) {
+            const selectedSize = document.querySelector(`input[name="${itemName}-size"]:checked`);
+            const selectedMilk = document.querySelector(`input[name="${itemName}-milk"]:checked`);
+
+            if (!selectedSize || !selectedMilk) {
+                alert("Please select size and milk options.");
+                return;
+            }
+
+            const size = selectedSize.nextElementSibling.textContent;
+            const milk = selectedMilk.nextElementSibling.textContent;
+            const price = parseFloat(selectedSize.dataset.price);
+
+            const existingItemIndex = cart.findIndex(item => item.name === itemName && item.size === size && item.milk === milk);
+
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity++;
+            } else {
+                cart.push({ name: itemName, size, milk, price, quantity: 1 });
+            }
+
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById("cartItems");
+            cartItems.innerHTML = "";
+
+            cart.forEach(item => {
+                const newItem = document.createElement("li");
+                newItem.textContent = `${item.name} - Size: ${item.size}, Milk: ${item.milk}, Price: R${item.price.toFixed(2)}, Quantity: ${item.quantity}`;
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.onclick = function() {
+                    removeFromCart(item.name, item.size, item.milk);
+                };
+
+                newItem.appendChild(removeButton);
+                cartItems.appendChild(newItem);
+            });
+        }
+
+        function removeFromCart(itemName, size, milk) {
+            const index = cart.findIndex(item => item.name === itemName && item.size === size && item.milk === milk);
+            if (index !== -1) {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1);
+                }
+                updateCart();
+            }
+        }
+
+        function proceedToCheckout() {
+            // Redirect to checkout page with selected options
+            const deliveryOption = confirm("Would you like delivery?");
+            if (deliveryOption) {
+                // Proceed with delivery
+                alert("Proceeding with delivery.");
+            } else {
+                // Proceed with collection
+                alert("Proceeding with collection.");
+            }
+        }
+    </script>
+</body>
+</html>
+
+   
