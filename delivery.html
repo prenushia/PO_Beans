@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4C301F;
+      font-weight: bold;
+      font-size: 2em; /* Increased font size */
+    }
+
+    h3 {
+      margin: 1em 0;
+      font-size: 1.5em; /* Increased font size */
+      font-weight: bold;
+      color:#839A71;
+	  text-align: center;
+    }
+
+    .form-section {
+      margin-bottom: 30px; /* Increased margin */
+    }
+
+    .form-group {
+      margin-bottom: 20px; /* Increased margin */
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px; /* Increased margin */
+      font-size: 1.2em; /* Increased font size */
+    }
+
+    .form-group input {
+      width: calc(100% - 12px);
+      padding: 12px; /* Increased padding */
+      font-size: 1.2em; /* Increased font size */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .submit-button {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 15px; /* Increased padding */
+      background-color: #839A71;
+      color: BLACK;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2em; /* Increased font size */
+    }
+
+    .submit-button:hover {
+      background-color: #839A71;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Delivery Details</h2>
+    <form id="delivery-form">
+      <div class="form-section">
+        <h3>Personal Details</h3>
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" required>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone-number">Phone Number</label>
+          <input type="tel" id="phone-number" name="phone-number" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Address Details</h3>
+        <div class="form-group">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="full-name" required>
+        </div>
+        <div class="form-group">
+          <label for="address-line-1">Address Line 1</label>
+          <input type="text" id="address-line-1" name="address-line-1" required>
+        </div>
+        <div class="form-group">
+          <label for="address-line-2">Address Line 2</label>
+          <input type="text" id="address-line-2" name="address-line-2">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" required>
+        </div>
+        <div class="form-group">
+          <label for="zip-code">Zip Code</label>
+          <input type="text" id="zip-code" name="zip-code" required>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Card Details</h3>
+        <div class="form-group">
+          <label for="card-number">Card Number</label>
+          <input type="text" id="card-number" name="card-number" required>
+        </div>
+        <div class="form-group">
+          <label for="card-expiry">Expiry Date (MM/YY)</label>
+          <input type="text" id="card-expiry" name="card-expiry" required>
+        </div>
+        <div class="form-group">
+          <label for="card-cvc">CVC</label>
+          <input type="text" id="card-cvc" name="card-cvc" required>
+        </div>
+        <div class="form-group">
+          <label for="card-name">Name on Card</label>
+          <input type="text" id="card-name" name="card-name" required>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Place Order</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('delivery-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Calculate the total price and save it in session storage
+      const orderTotal = sessionStorage.getItem('orderTotal') || '0.00';
+      sessionStorage.setItem('orderTotal', orderTotal);
+
+      // Redirect to order summary page
+      window.location.href = 'ordersummary.html';
+    });
+  </script>
+</body>
+</html>

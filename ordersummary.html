@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Summary</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #839A71;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      margin: 0;
+    }
+
+    header .home-icon {
+      font-size: 1.5em;
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: url('Bpic.jpg') no-repeat center center;
+      background-size: cover;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      color: white;
+	  max-width: 100%;
+     max-height: 100%;
+  display: block; /* Ensures the image is treated as a block element */
+  margin: auto; /* Centers the image horizontally */
+    }
+
+    .content {
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    h2 {
+      color: #fff;
+    }
+
+    .tracking-number,
+    .order-number {
+      font-weight: bold;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    footer .social-icons {
+      margin-top: 10px;
+    }
+
+    footer .social-icons a {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <i class="fa-solid fa-house"></i>
+    <h1>Order Summary</h1>
+  </header>
+  <main>
+    <div class="content">
+      <h2>Order Summary</h2>
+      <div class="order-summary">
+        <p>Thank you for your order! Here are your order details:</p>
+        <p class="order-number">Order Number: <span id="order-number">123456</span></p>
+        <p class="tracking-number">Tracking Number: <span id="tracking-number">78910</span></p>
+      </div>
+      <div class="total">
+        Total: $<span id="order-total">0.00</span>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+            <div class="social-icons">
+                <i class="fab fa-instagram icon"></i>
+                <i class="fab fa-facebook-f icon"></i>
+                <i class="fab fa-twitter icon"></i>
+            </div>
+            <div class="copyright">
+                &copy; 2024 PO Beans. All rights reserved.
+            </div>
+        </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Retrieve the order total from sessionStorage, default to "0.00" if not found
+      const orderTotal = sessionStorage.getItem("orderTotal") || "0.00";
+      document.getElementById("order-total").textContent = orderTotal;
+
+      // Generate dummy order number and tracking number for this example
+      document.getElementById("order-number").textContent = Math.floor(Math.random() * 1000000).toString();
+      document.getElementById("tracking-number").textContent = Math.floor(Math.random() * 1000000).toString();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection Details</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4C301F;
+      font-weight: bold;
+      font-size: 2em; /* Increased font size */
+    }
+
+    h3 {
+      margin: 1em 0;
+      font-size: 1.5em; /* Increased font size */
+      font-weight: bold;
+      color: #665B55;
+    }
+
+    .form-section {
+      margin-bottom: 30px; /* Increased margin */
+    }
+
+    .form-group {
+      margin-bottom: 20px; /* Increased margin */
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px; /* Increased margin */
+      font-size: 1.2em; /* Increased font size */
+    }
+
+    .form-group input,
+    .form-group select {
+      width: calc(100% - 12px);
+      padding: 12px; /* Increased padding */
+      font-size: 1.2em; /* Increased font size */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .submit-button {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: 15px; /* Increased padding */
+      background-color: #839A71;
+      color: BLACK;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2em; /* Increased font size */
+    }
+
+    .submit-button:hover {
+      background-color: #839A71;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Collection Details</h2>
+    <form id="collection-form">
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-number">Phone Number</label>
+          <input type="tel" id="contact-number" name="contact-number" required>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Select Store for Collection</h3>
+        <div class="form-group">
+          <label for="collection-store">Store</label>
+          <select id="collection-store" name="collection-store" required>
+            <option value="">-- Select Store --</option>
+            <option value="store1">Corner le Roux and, Pretoria Main Rd, Mirand 1685</option>
+            <option value="store2">14 Menton Rd, Richmond, Johannesburg, 2092</option>
+            <option value="store3">Old Edwardian Society, 4th St, Houghton Estate, Johannesburg, 2198</option>
+            <option value="store4">Cnr Whiteley Road and, The High St, Melrose, Johannesburg, 2196</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="place-order-btn" class="submit-button">Place Order</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('collection-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      fetch('config.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.logged_in) {
+            window.location.href = 'ordersummary.html';
+          } else {
+            alert('Please login to continue.');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>
